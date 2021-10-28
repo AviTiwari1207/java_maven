@@ -1,6 +1,10 @@
 pipeline
 {
     agent any
+    tools {
+        // auto installed maven
+        maven "Maven3.8.2"
+    }
     stages
     {
         stage('Git Clone')
@@ -8,6 +12,13 @@ pipeline
             steps
             {
                 git credentialsId: 'my-github-credentials', url: 'https://github.com/AviTiwari1207/java_maven.git'
+            }
+        }
+        stage('Maven Build')
+        {
+            steps
+            {
+                sh 'mvn clean install'
             }
         }
     }
